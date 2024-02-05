@@ -23,7 +23,7 @@ public sealed class FirebaseService
 
     #region Device
 
-    public async Task<DeviceDto?> AddDevice(CreateDeviceDto device, CancellationToken cancellationToken)
+    public async Task<DeviceDto> AddDevice(CreateDeviceDto device, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(firestoreDb);
         return await firestoreDb.AddDevice(device, cancellationToken);
