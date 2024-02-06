@@ -14,7 +14,8 @@ internal static class ComponentMapper
             MinWidth = componentDto.WidthRange.min,
             MaxWidth = componentDto.WidthRange.max,
             MinHeight = componentDto.HeightRange.min,
-            MaxHeight = componentDto.HeightRange.max
+            MaxHeight = componentDto.HeightRange.max,
+            Mode = (int)componentDto.Mode
         };
     }
 
@@ -27,7 +28,8 @@ internal static class ComponentMapper
             MinWidth = componentDto.WidthRange.min,
             MaxWidth = componentDto.WidthRange.max,
             MinHeight = componentDto.HeightRange.min,
-            MaxHeight = componentDto.HeightRange.max
+            MaxHeight = componentDto.HeightRange.max,
+            Mode = (int)componentDto.Mode
         };
     }
 
@@ -40,7 +42,8 @@ internal static class ComponentMapper
             Id = componentEntity.Id,
             Name = componentEntity.Name,
             WidthRange = widthRange,
-            HeightRange = heightRange
+            HeightRange = heightRange,
+            Mode = (ComponentModes)componentEntity.Mode
         };
     }
 }

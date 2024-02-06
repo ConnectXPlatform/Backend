@@ -17,6 +17,8 @@ public sealed class ComponentEntity
     public int MinHeight { get; init; }
     [FirestoreProperty("maxHeight")]
     public int MaxHeight { get; init; }
+    [FirestoreProperty("maxHeight")]
+    public int Mode { get; init; }
 }
 
 [FirestoreData]

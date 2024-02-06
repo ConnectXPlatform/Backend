@@ -5,6 +5,7 @@ public sealed class CreateComponentDto
     public required string Name { get; init; }
     public required (int min, int max) WidthRange { get; init; }
     public required (int min, int max) HeightRange { get; init; }
+    public required ComponentModes Mode { get; init; }
 }
 
 public sealed class CreatePositionedComponentDto
