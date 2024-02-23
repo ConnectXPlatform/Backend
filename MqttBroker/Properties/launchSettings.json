@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "MqttBroker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "GOOGLE_APPLICATION_CREDENTIALS": "D:\\Libraries\\Work\\Downloads\\connectx-2fa41-firebase-adminsdk-knqoa-d4596e6d5f.json",
+        "PROJECT_NAME": "connectx-2fa41"
+      }
+    }
+  }
+}
