@@ -1,6 +1,5 @@
 ﻿using Firebase;
 using Domain.ControlPanelDtos;
-using DatabaseServer.Endpoints;
 
 namespace DatabaseServer.Repositories;
 
