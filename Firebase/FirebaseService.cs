@@ -9,15 +9,19 @@ using Domain.ControlPanelDtos;
 using Domain.DeviceInfoDtos;
 using Domain.TopicDtos;
 using Domain.UserDtos;
+using FirebaseAdmin.Auth;
+using FirebaseAdmin;
 
 namespace Firebase;
 
 public sealed class FirebaseService
 {
     private FirestoreDb? firestoreDb;
+    private FirebaseApp? firebaseApp;
 
     public async Task Initialize(string projectId)
     {
+        firebaseApp = FirebaseApp.DefaultInstance ?? FirebaseApp.Create();
         firestoreDb = await FirestoreDb.CreateAsync(projectId);
     }
 
@@ -279,9 +283,21 @@ public sealed class FirebaseService
 
     #endregion
 
-    public async Task<bool> ValidateCredentials(string userId, string deviceId)
+    public async Task<bool> ValidateCredentials(string deviceId, string idToken)
     {
         ArgumentNullException.ThrowIfNull(firestoreDb);
-        return await firestoreDb.UserHasDevice(userId, deviceId);
+        FirebaseToken token;
+        try
+        {
+            token = await FirebaseAuth.GetAuth(firebaseApp).VerifyIdTokenAsync(idToken);
+        }
+        catch (FirebaseAuthException)
+        {
+            return false;
+        }
+        // After we made sure the token is valid, we check that the account is verified
+        return bool.Parse(token.Claims.GetValueOrDefault("email_verified", bool.FalseString).ToString()!)
+            //  And that the given device is registered in the database and associated with the token's user
+            && await firestoreDb.UserHasDevice(token.Uid, deviceId);
     }
 }
